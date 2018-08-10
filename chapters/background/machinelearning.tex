@@ -1,0 +1,49 @@
+\section{Machine Learning}\label{sec:ML}
+The machine learning methods we will consider in this thesis is Ridge Regression with Random Fourier Features (RR-RFF), in the following we will briefly explain the above-mentioned model.
+The simplest form of regression is the least square regression:
+\begin{equation}
+    f(\mathbf{x}) = \mathbf{w}^T\mathbf{x}
+    \label{eq:lsr}
+\end{equation}
+where $\mathbf{w}$ is a weight vector and $\mathbf{x}$ is the input feature vector.
+The optimal values for the elements of the vector $\mathbf{w}$ can be found through the minimization of the sum of the squared error between the prediction $f(\mathbf{x})$ and the correct target label $y$. The resulting optimization problem is:
+\begin{equation}
+    \underset{\mathbf{w}}{arg\,min} \sum_{i=1}^{n} (y_i - f(\mathbf{x}_i))
+    \label{eq:lsrmin}
+\end{equation}
+where $n$ is the number of training samples and $y_i$ is the target label corresponding to the sample $\mathbf{x}_i$. The closed form solution of this optimization problem can easily be found by differentiating equation \ref{eq:lsrmin} with respect to $\mathbf{w}$, setting the result equal to zero and solving the resulting equation for $\mathbf{w}$. The resulting closed form solution is:
+\begin{equation}
+    \hat{\mathbf{w}} = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{y}
+    \label{eq:closedlsr}
+\end{equation}
+where $\mathbf{X} \in \mathbb{R}^{n \times d}$, $n$ is the number of training samples and $d$ is the number of input features. In order to limit the overfitting of the model and, as consequence, achieve a more stable model, a regularisation term can be used. This term leads to a penalization on the values of the weights and therefore to a smoother model. This particular kind of regression is known as Ridge Regression (RR) [\cite{hoerl1970ridge}], the minimization problem becomes:
+\begin{equation}
+    \underset{\mathbf{w}}{arg\,min} \,\, \frac{1}{2} \sum_{i=1}^{n} (y_i - f(\mathbf{x}_i)) + \frac{\lambda}{2} ||\mathbf{w}||^2
+    \label{eq:lsrminreg}
+\end{equation}
+where $\lambda$ is a strictly positive hyperparameter which scales the contribution of the regularization parameter in the equation. The closed form solution for Ridge Regression can be easily found following the same step used for the standard least square regression.
+\begin{equation}
+    \hat{\mathbf{w}} = (\mathbf{X}^T \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^T \mathbf{y}
+    \label{eq:closedrr}
+\end{equation}
+where $\mathbf{I} \in \mathbb{R}^{d \times d}$ is the identity matrix.
+Ridge Regression is a linear model: to extend its application to nonlinear dataset, we can map the input space to a higher dimensional space using a nonlinear basis function $\mathbf{\phi}$:
+\begin{equation}
+    f(\mathbf{x}) = \mathbf{w}^T\mathbf{\phi}(\mathbf{x})
+    \label{eq:fmrr}
+\end{equation}
+\begin{equation}
+    \hat{\mathbf{w}} = (\mathbf{\Phi}^T \mathbf{\Phi} + \lambda \mathbf{I})^{-1} \mathbf{\Phi}^T \mathbf{y}
+    \label{eq:closedfmrr}
+\end{equation}
+where $\mathbf{\Phi} := \mathbf{\Phi}(\mathbf{X}) \in \mathbb{R}^{n \times D}$ and $\mathbf{I} \in \mathbb{R}^{D \times D}$, the number of basis function $D$ is a new hyperparameter of the model.\\
+In this thesis we have followed in the step of the work done in \cite{Strazzulla2017} and therefore we have chosen Random Fourier Features (RFF) as basis function:
+\begin{equation}
+    \phi_{RFF}(\mathbf{x}) = \sqrt{2} \cdot cos(\sigma \cdot \mathbf{\Omega} \cdot \mathbf{x} + \beta)
+    \label{eq:rff}
+\end{equation}
+\begin{equation}
+    \mathbf{\Phi} = \mathbf{\Phi}_{RFF}(\textbf{X}) = \sqrt{2} \cdot cos(\mathbf{X} \cdot (\sigma \cdot \mathbf{\Omega})^T + \beta)
+    \label{eq:matrff}
+\end{equation}
+where $\mathbf{\Omega} \in \mathbb{R}^{D \times d}$, $\beta \in \mathbb{R}^D$, $\mathbf{\Omega} \sim \mathcal{N}(0,\,1)$ and $\beta \sim \mathcal{U}(0, 2\pi)$ and $\sigma$ is an hyperparameter which scales the frequency of the distribution.

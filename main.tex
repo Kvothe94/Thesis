@@ -1,0 +1,85 @@
+\documentclass[12pt]{book}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm,bindingoffset=6mm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{fancyhdr}
+\usepackage[round]{natbib}
+\usepackage{algorithmicx}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage[backref = page]{hyperref}
+\usepackage{color}
+\usepackage{fancyvrb}
+\usepackage{stmaryrd}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\graphicspath{{images/}}
+
+\newenvironment{acknowledgements}%
+    {\cleardoublepage\null\vfill\begin{center}%
+    \bfseries Acknowledgements\end{center}}%
+    {\vfill\null}
+
+\newenvironment {abstract}%
+ {\cleardoublepage\thispagestyle{empty}\null\vfill\begin{center}%
+    \bfseries\abstractname\end{center}}%
+    {\vfill\null}
+
+\newcommand{\fncyfront}
+{
+\fancyfoot [R]{}
+\fancyhead [L]{\footnotesize {\leftmark}}
+\fancyfoot [C]{\thepage}
+\fancyhead [R, L]{}
+\renewcommand {\headrulewidth}{0.0 pt}
+}
+%
+%
+\newcommand {\fncymain}{%
+\fancyhead [R]{{}}
+\fancyhead [L]{{\footnotesize \leftmark}}
+\fancyfoot [C]{\thepage}
+\fancyfoot [R]{}
+\fancyfoot [L]{}
+\renewcommand {\headrulewidth }{0.3 pt}
+}
+%
+\setlength{\headheight}{14.5pt}
+%
+%
+\begin{document}
+\pagestyle{fancy}
+\onehalfspacing
+%
+% header
+\fncyfront
+\frontmatter
+\input{chapters/front/front-page.tex}
+\input{chapters/front/dedications.tex}
+\input{chapters/front/abstract.tex}
+\input{chapters/front/acknowledgements.tex}
+%
+\tableofcontents
+\listoffigures
+\listoftables
+
+\fncymain
+\mainmatter
+\input{chapters/introduction.tex}
+\input{chapters/background.tex}
+\input{chapters/overshooting.tex}
+\input{chapters/conclusion.tex}
+
+\bibliographystyle{plainnat}
+\bibliography{mybib.bib}
+\end{document}
