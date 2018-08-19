@@ -11,7 +11,7 @@ In order to avoid that knowledge about the experiment could modify the performan
 \subsection{Experimental Setup}\label{subsec:exp-setup}
 The experimental setup was common to both the experiments: it consisted of a Myo bracelet (see section \ref{sec:interactivemyocontrol}) and two 3D hand models displayed on a computer screen. This two hand model realistically mimic the motions of a human wrist and hand: one is used to provide the visual reference, e.g. it is controlled by the software, whereas the other is used to show the predicted motions as provided by the bracelet and by the chosen controller. We call the first hand model \textit{Stimulus} and the second one \textit{Prosthesis}.
 \subsection{Participants}\label{subsec:exp-participants}
-As participants for the first experiment we found six intact humans, of which one was female and the others were males, all between 21 and 32 years old. In the other experiment we had twelve intact humans as participants, four were females and six were males, all between 23 and 27 years old. Before beginning the experiment, we clearly explained to each participant, both orally and in writing, that no health risk was involved in the experiment.  Each participant signed an informed consent form. The experiment was previously approved by the internal committee for data protection of the Institution where the experiments took place, and it followed the World Medical Association’s Declaration of Helsinki.
+As participants for the first experiment we found six intact humans, of which one was female and the others were males, all between 21 and 32 years old. In the other experiment we had twelve intact humans as participants, four were females and six were males, all between 23 and 27 years old. Before beginning the experiment, we clearly explained to each participant, both orally and in writing, that no health risk was involved in the experiment.  Each participant signed an informed consent form. The experiment was previously approved by the internal committee for data protection of the Institution where the experiments took place, and it followed the World Medical Association’s Declaration of Helsinki. All the participant were inexpert users of the system.
 \subsection{Experiment Parameters}\label{subsec:exp-parameters}
 For both experiments we chose a tolerance threshold of 15\% for the goal to be reached, 1.5 seconds for the required target dwelling time and 15 seconds for the timeout time. In the second experiment we dampened the prediction $f_A$ in order to hopefully elicit overshooting: when the participant would try to reach the maximum activation for $t_A = 1$ they would only see a prediction equals to $f_A = 0.75$ and therefore she would be encouraged to increase her force to $t_A > 1$.  
 \section{Experimental Protocol}\label{sec:exp-protocol}
@@ -21,12 +21,154 @@ In either experiments the participant sat comfortably in front of the computer s
 We then explained to the participant that she would be required to complete a training session for the prosthesis before facing a series of 36 task, during which she would be required to guide the Prosthesis in following the reference shown by the Stimulus as close as possible using the signal from the movements of her own arm.
 At the beginning of the training session the Stimulus was shown on the screen and we explained to the participant that the Stimulus would perform a series of movement and that she should mimic what the Stimulus was doing with her own arm. At the end of the explanation the data gathering phase began: the Stimulus played once each action of interest (rest, RE; power grasp, PW; wrist extension, EX; wrist flexion, FL) and while the participant followed the movements of the Stimulus the observation were collected. After the end of the previous phase the Prosthesis would appear on the screen and the series of 36 task would began.
 \section{Experimental Results}\label{sec:exp-results}
-\subsection{Performance Measures and Statistics}
+\subsection{Performance Measures and Statistics}\label{subsec:measures}
 For each task we decided to report the following measures of performance:
 \begin{itemize}
-    \item \textbf{Success Rate} (\textbf{SR}): this measure is the fraction of task successfully completed, an instance of this measure is computed for each participant as the number of tasks completed successfully by the participant divided for the total number of tasks faced by that participant.
-    \item \textbf{Time to Complete Task} (\textbf{TCT}): this measure is the time needed to complete a task. This measure is computed separately for each task.
-    \item \textbf{Time In Target} (\textbf{TIT}): this measure is the total time the participant managed to stay in the target before the timeout or before the completion of the task. This measure is computed separately for each task.
+    \item \textbf{Success Rate} (\textbf{SR}): this measure is the fraction of task successfully completed, an instance of this measure is computed for each participant as the number of tasks completed successfully by the participant divided for the total number of tasks faced by that participant. This measure is computed separately for each participant and the statistical tests and computations consider the participants as samples.
     \item \textbf{Reaching Rate} (\textbf{RR}): this measure is the fraction of time during which the output $f_A$ was higher than the minimum acceptable value, e.g. the percentage of time the participant actually managed to reach the desired activation value.
     We chose to consider this measure in order to verify whether a failure was really due to overshooting or due to another problem like interference.
+    This measure is computed separately for each task and the statistical tests and computations consider the tasks as samples.
+    \item \textbf{Time to Complete Task} (\textbf{TCT}): this measure is the time needed to complete a task. This measure is computed separately for each task and the statistical tests and computations consider the tasks as samples.
+    \item \textbf{Time In Target} (\textbf{TIT}): this measure is the total time the participant managed to stay in the target before the timeout or before the completion of the task. This measure is computed separately for each task and the statistical tests and computations consider the tasks as samples.
+    \item \textbf{Time To Repair} (\textbf{TTR}): this measure is the time needed for the repair process to modify the original controller. This measure is computed separately for each participant because the training and repair of the controller is done one time for each participant and the statistical tests and computations consider the participants as samples.
 \end{itemize}
+In the following boxplots the central mark represent the median, whereas the upper and the lower edges of the box denotes respectively the 25th and 75th percentiles. The whiskers extend to the extreme data points not considered outliers, whereas the outliers are represented individually using the '$+$' symbol.
+As statistical tests for significance we have used the Wilcoxon's Signed Rank test and we have computed the effect size using Cohen's $d$ coefficient.
+\subsection{First Experiment}\label{subsec:first-exp}
+In the following we show the above mentioned measures of performance for each of the three controller we have considered (Unrepaired, SMT-Repaired, PDO-Repaired) obtained by the participants of the first experiment: we consider separately each of the measures of interest.
+\subsubsection{Success Rate (SR)}\label{subsub:first-SR}
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        - & \textbf{Unrepaired} & \textbf{SMT-Repaired} & \textbf{PDO-Repaired} \\
+        \hline
+        \textbf{Mean} & 66.67\% & 79.17\% & 63.89\% \\
+        \textbf{Standard Deviation} & 19.00\% & 23.42\% & 20.18\% \\
+        \hline
+    \end{tabular}
+    \caption{Table showing the mean and standard deviation of the Success Rate for the different controllers of interest.}
+    \label{tab:SR-first-mean-std}
+\end{table}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{Images/first-experiment/exp0_success_rate}
+    \caption{Boxplot showing the Success Rate (SR) of the participants of the first experiment for the controllers of interest}
+    \label{fig:box-SR-first}
+\end{figure}
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        - & \textbf{Cohen's} $\mathbf{d}$ & $\mathbf{p-value}$ \\
+        \hline
+        \textbf{Unrepaired / SMT-Repaired} & 0.5861 & 0.2500 \\
+        \textbf{Unrepaired / PDO-Repaired} & 0.1417 & 0.8125 \\
+        \textbf{SMT-Repaired / PDO-Repaired} & 0.6988 & 0.2500 \\
+        \hline
+    \end{tabular}
+    \caption{Table showing the Cohen's $d$ coefficient and the p-value of the Success Rate for the different combinations of the controllers of interest.}
+    \label{tab:SR-first-cohen-p}
+\end{table}
+As can be seen from the tables \ref{tab:SR-first-mean-std} and \ref{tab:SR-first-cohen-p} and figure \ref{fig:box-SR-first} there is no statistical significance between the Success Rate of the different machine learned controllers. Even so, considering the values of means and standard deviations, we believe that, given a higher number of participant for the experiment, the difference between the performances of the Unrepaired and the SMT-Repaired controllers would became significant. Anyway the above mentioned results show that the performance of the two repaired controllers are, at least, not inferior to those of the unrepaired one. Another interesting point is that the repaired controllers are the only ones on which at least a participant managed to complete successfully all the tasks.
+\subsubsection{Reaching Rate (RR)}\label{subsub:first-RR}
+For the Reaching Rate we have decided to first analyse separately the measurements from the failed task and those from the successful task; then we also analysed the measurements from all the task, both failed and successful, in order to be able to compute the cohen's $d$ coefficient and the p-value.
+%
+%   FAILED
+%
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        - & \textbf{Unrepaired} & \textbf{SMT-Repaired} & \textbf{PDO-Repaired} \\
+        \hline
+        \textbf{Mean} & 14.61\% & 31.94\% & 30.05\% \\
+        \textbf{Standard Deviation} & 62.99\% & 77.06\% & 78.52\% \\
+        \hline
+    \end{tabular}
+    \caption{Table showing the mean and standard deviation of the Reaching Rate for the failed tasks for the different controllers of interest.}
+    \label{tab:RR-fail-first-mean-std}
+\end{table}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{Images/first-experiment/exp0_RR_fail_hist.eps}
+    \caption{Histogram showing the number of failed tasks for Reaching Rate (RR) for the first experiment for the controllers of interest}
+    \label{fig:hist-RR-fail-first}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{Images/first-experiment/exp0_RR_fail_box.eps}
+    \caption{Boxplot showing the Reaching Rate (RR) of the failed tasks of the first experiment for the controllers of interest}
+    \label{fig:box-RR-fail-first}
+\end{figure}
+As can be seen from table \ref{tab:RR-fail-first-mean-std} and figures \ref{fig:hist-RR-fail-first} and \ref{fig:box-RR-fail-first} the reaching rate for the failed tasks is significantly higher for the two repaired controllers: in particular the mean of the reaching rate is more or less twice that of the unrepaired controller. This result show that  even if the participant didn't manage to complete successfully some tasks, it was still easier to reach the correct activation value on the two repaired controllers then on the unrepaired one. Furthermore this result can be seen as the proof that both our automated repair process indeed manage to enhance the reliability of the original controller with respect to the problem of activation overshooting.
+%
+%   SUCCESSFUL
+%
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        - & \textbf{Unrepaired} & \textbf{SMT-Repaired} & \textbf{PDO-Repaired} \\
+        \hline
+        \textbf{Mean} & 62.99\% & 77.06\% & 78.52\% \\
+        \textbf{Standard Deviation} & 19.83\% & 19.39\% & 17.72\% \\
+        \hline
+    \end{tabular}
+    \caption{Table showing the mean and standard deviation of the Reaching Rate for the successful tasks for the different controllers of interest.}
+    \label{tab:RR-succ-first-mean-std}
+\end{table}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{Images/first-experiment/exp0_RR_succ_hist.eps}
+    \caption{Histogram showing the number of successful tasks for Reaching Rate (RR) for the first experiment for the controllers of interest}
+    \label{fig:hist-RR-succ-first}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{Images/first-experiment/exp0_RR_succ_box.eps}
+    \caption{Boxplot showing the Reaching Rate (RR) of the successful tasks of the first experiment for the controllers of interest}
+    \label{fig:box-RR-succ-first}
+\end{figure}
+%
+%   ALL
+%
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        - & \textbf{Unrepaired} & \textbf{SMT-Repaired} & \textbf{PDO-Repaired} \\
+        \hline
+        \textbf{Mean} & 46.86\% & 67.66\% & 61.01\% \\
+        \textbf{Standard Deviation} & 30.33\% & 28.58\% & 31.81\% \\
+        \hline
+    \end{tabular}
+    \caption{Table showing the mean and standard deviation of the Reaching Rate for the all the tasks for the different controllers of interest.}
+    \label{tab:RR-all-first-mean-std}
+\end{table}
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        - & \textbf{Cohen's} $\mathbf{d}$ & $\mathbf{p-value}$ \\
+        \hline
+        \textbf{Unrepaired / SMT-Repaired} & 0.7059 & $2.0509 \cdot 10^{-5}$ \\
+        \textbf{Unrepaired / PDO-Repaired} & 0.4553 & 0.0070\\
+        \textbf{SMT-Repaired / PDO-Repaired} & 0.2199 & 0.0925 \\
+        \hline
+    \end{tabular}
+    \caption{Table showing the Cohen's $d$ coefficient and the p-value of the Reaching Rate for the different combinations of the controllers of interest.}
+    \label{tab:RR-all-first-cohen-p}
+\end{table}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{Images/first-experiment/exp0_RR_all_hist.eps}
+    \caption{Histogram showing the number of successful tasks for Reaching Rate (RR) for the first experiment for the controllers of interest}
+    \label{fig:hist-RR-all-first}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{Images/first-experiment/exp0_RR_all_box.eps}
+    \caption{Boxplot showing the Reaching Rate (RR) of all the tasks of the first experiment for the controllers of interest}
+    \label{fig:box-RR-all-first}
+\end{figure}
